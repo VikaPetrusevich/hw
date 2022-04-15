@@ -15,15 +15,18 @@ namespace AvtoStore.DAL
             _store.Add(vehicleModel);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
+            bool isDeleted = false;
             for (int i = 0; i < _store.Count; i++)
             {
                 if (_store[i].Id == id)
                 {
                     _store.RemoveAt(i);
+                    isDeleted = true;
                 }
             }
+            return isDeleted;
         }
 
         public List<T> GetAll()
@@ -33,7 +36,7 @@ namespace AvtoStore.DAL
 
         public T GetById(Guid id)
         {
-            var vehicleModel = _store.First(x => x.Id == id);
+            var vehicleModel = _store.FirstOrDefault(x => x.Id == id);
             return vehicleModel;
         }
     }

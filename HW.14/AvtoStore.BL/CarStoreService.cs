@@ -24,6 +24,10 @@ namespace AvtoStore.BL
         public CarModel GetCarById(Guid id)
         {
             CarModel car = _carRepository.GetById(id);
+            if (car == null) 
+            {
+                throw new TransportNotFoundException($"Car with id = {id} don't found.");
+            }
             return car;
         }
 
@@ -35,7 +39,11 @@ namespace AvtoStore.BL
 
         public void UpdateCar(CarModel carModel)
         {
-            _carRepository.Delete(carModel.Id);
+           bool isDeleted =  _carRepository.Delete(carModel.Id);
+            if (!isDeleted) 
+            {
+                throw new TransportNotFoundException($"Car with id = {carModel.Id} don't deleted.");
+            }
             _carRepository.Add(carModel);
         }
     }

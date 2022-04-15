@@ -149,7 +149,7 @@ Console.WriteLine(carById);
 
 Console.WriteLine("Delete car model №2 by Id.");
 
-serviceCar.DeleteCar(carModel.Id);
+serviceCar.DeleteCar(carModel2.Id);
 
 cars = serviceCar.GetCarList();
 
@@ -176,4 +176,35 @@ cars = serviceCar.GetCarList();
 foreach (var item in cars)
 {
     Console.WriteLine(item.ToString());
+}
+
+Console.WriteLine("Catch exception get car by id.");
+try
+{
+    var carByIdException = serviceCar.GetCarById(Guid.NewGuid());
+}
+catch (TransportNotFoundException ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
+Console.WriteLine("Catch exception update car.");
+try
+{
+    var carModel6 = new CarModel()
+    {
+        Id = Guid.NewGuid(),
+        Name = "Ford",
+        Model = "R555",
+        Year = 2021,
+        Odometer = 80
+    };
+
+    serviceCar.UpdateCar(carModel6);
+}
+catch (TransportNotFoundException ex)
+{
+
+    Console.WriteLine(ex.Message);
 }

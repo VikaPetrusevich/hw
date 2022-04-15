@@ -14,6 +14,6 @@ namespace AvtoStore.DAL
 
         List<T> GetAll();
 
-        void Delete(Guid id);
+        bool Delete(Guid id);
     }
 }
