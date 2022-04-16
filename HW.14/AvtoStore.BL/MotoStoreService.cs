@@ -24,6 +24,10 @@ namespace AvtoStore.BL
         public MotoModel GetMotoById(Guid id)
         {
             MotoModel moto = _motoRepository.GetById(id);
+            if (moto == null) 
+            {
+                throw new TransportNotFoundException($"Moto with id = {id} don't found.");
+            }
             return moto;
         }
 
@@ -35,7 +39,11 @@ namespace AvtoStore.BL
 
         public void UpdateMoto(MotoModel motoModel)
         {
-            _motoRepository.Delete(motoModel.Id);
+            bool isDeleted = _motoRepository.Delete(motoModel.Id);
+            if (!isDeleted) 
+            {
+                throw new TransportNotFoundException($"Moto with id = {motoModel.Id} don't deleted.");
+            }
             _motoRepository.Add(motoModel);
         }
     }

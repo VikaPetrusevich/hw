@@ -178,7 +178,35 @@ foreach (var item in cars)
     Console.WriteLine(item.ToString());
 }
 
-Console.WriteLine("Catch exception get car by id.");
+Console.WriteLine("\nCatch exception get moto by id.");
+try
+{
+    var motoByIdException = serviceMoto.GetMotoById(Guid.NewGuid());
+}
+catch (TransportNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+Console.WriteLine("\nCatch exception update moto.");
+try
+{
+    var motoModel6 = new MotoModel()
+    {
+        Id = Guid.NewGuid(),
+        Name = "Minsk",
+        Model = "A100",
+        Year = 2020,
+        Odometer = 100
+    };
+    serviceMoto.UpdateMoto(motoModel6);
+}
+catch (TransportNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+Console.WriteLine("\nCatch exception get car by id.");
 try
 {
     var carByIdException = serviceCar.GetCarById(Guid.NewGuid());
@@ -189,7 +217,7 @@ catch (TransportNotFoundException ex)
     Console.WriteLine(ex.Message);
 }
 
-Console.WriteLine("Catch exception update car.");
+Console.WriteLine("\nCatch exception update car.");
 try
 {
     var carModel6 = new CarModel()
