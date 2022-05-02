@@ -8,12 +8,14 @@ namespace Sushi.DAL
 {
     public class BaseSushiSet
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
         
         public int Weight { get; set; }
 
-        public decimal Prace { get; set; }
+        public decimal Price { get; set; }
     }
 }

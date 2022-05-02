@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sushi.BL
 {
-    public interface ISushiSetCollection
+    public interface ISushiSetService
     {
         void AddSet(SushiSet sushiSet);
 

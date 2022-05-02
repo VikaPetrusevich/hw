@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sushi.BL
 {
-    public class SushiSetCollection : ISushiSetCollection
+    public class SushiSetService : ISushiSetService
     {
         private IRepository<SushiSet> _sushiRepository = new ListRepository<SushiSet>();
 
