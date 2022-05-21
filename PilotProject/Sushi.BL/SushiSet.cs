@@ -11,7 +11,7 @@ namespace Sushi.BL
     {
         public override string ToString()
         {
-            return $"Id: {Id}; Name: {Name}; Description: {Description}; Weight: {Weight}; Prace: {Price}.";
+            return $"Номер суши сета: {Id}; \nНазвание: {Name}; \nОписание: {Description}; \nВес: {Weight}; \nЦена: {Price}.\n";
         }
     }
 }

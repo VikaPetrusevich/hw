@@ -1,5 +1,7 @@
 ﻿using Sushi.BL;
+ISushiSetService setCollectionService = new SushiSetService();
 
+#region logic
 var sushiSet = new SushiSet()
 {
     Id = 1,
@@ -16,7 +18,7 @@ var sushiSet = new SushiSet()
 var sushiSet2 = new SushiSet()
 {
     Id = 2,
-    
+
     Name = "ШОУ-РОЛЛЗ",
 
     Description = "Суши-сет из шести роллов: Филадельфия мини, Ролл с лососем и авокадо, Коста, Сезам с чука, Тигра, Гринвуд.",
@@ -26,16 +28,55 @@ var sushiSet2 = new SushiSet()
     Price = 62.90M
 };
 
-ISushiSetService setCollection = new SushiSetService();
 
-setCollection.AddSet(sushiSet);
-setCollection.AddSet(sushiSet2);
 
-Console.WriteLine("Return all Sushi Set.");
+setCollectionService.AddSet(sushiSet);
+setCollectionService.AddSet(sushiSet2);
 
-var sushiSets = setCollection.GetSushiList();
+#endregion
 
-foreach (var item in sushiSets)
+var userWantExit = false;
+while (!userWantExit) 
 {
-    Console.WriteLine(item.ToString());
+    Console.WriteLine("Нажмите 1 для вывода меню суши сетов.");
+    Console.WriteLine("Нажмите 2 для просмотра заказов в корзине.");
+    Console.WriteLine("Нажмите 3 для оформления заказа.");
+    Console.WriteLine("Нажмите 4 для выхода.");
+    var choose = int.Parse(Console.ReadKey().KeyChar.ToString());
+    MainMenuHandle(choose, ref userWantExit);
+}
+
+void MainMenuHandle(int key,ref bool userWantExit) 
+{
+    Console.WriteLine("\n************************************");
+    switch (key)
+    {
+        case 1: DisplaySushiSetHandle();
+            break;
+        case 2: Console.WriteLine("Вы выбрали просмотр корзины.");
+            break;
+        case 3: Console.WriteLine("Вы выбрали оформление заказа.");
+            break;
+        case 4: ExistHandle(ref userWantExit);
+            break;
+        default:
+            Console.WriteLine("Вы сделали неправильный выбор.");
+            break;
+    }
+}
+
+void DisplaySushiSetHandle() 
+{
+    Console.WriteLine("Вы выбрали меню суши сетов.");
+    var sushiSetList =  setCollectionService.GetSushiList();
+    foreach (var item in sushiSetList)
+    {
+        Console.WriteLine(item.ToString());
+    }
+}
+
+void ExistHandle(ref bool userWantExit) 
+{ 
+    userWantExit = true;
+    Console.WriteLine("Вы выбрали выход.");
 }
