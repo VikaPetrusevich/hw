@@ -67,12 +67,28 @@ void MainMenuHandle(int key,ref bool userWantExit)
 
 void DisplaySushiSetHandle() 
 {
-    Console.WriteLine("Вы выбрали меню суши сетов.");
-    var sushiSetList =  setCollectionService.GetSushiList();
-    foreach (var item in sushiSetList)
+    var isBack = false;
+    while (!isBack)
     {
-        Console.WriteLine(item.ToString());
+        Console.WriteLine("Меню суши сетов.");
+        var sushiSetList = setCollectionService.GetSushiList();
+        foreach (var item in sushiSetList)
+        {
+            Console.WriteLine(item.ToString());
+        }
+        Console.WriteLine("Выберете номер суши-сета для добавения его в корзину заказов.");
+        Console.WriteLine("Нажмите 0 для выхода из меню.");
+        var choose = int.Parse(Console.ReadKey().KeyChar.ToString());
+        if (choose == 0)
+        {
+            isBack = true;
+        }
+        else
+        {
+
+        }
     }
+    
 }
 
 void ExistHandle(ref bool userWantExit) 

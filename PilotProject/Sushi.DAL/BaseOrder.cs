@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sushi.DAL
 {
-    public interface IRepository<T>
+    public class BaseOrder
     {
-        void Add(T set);
-
-        List<T> GetAll();
-
-        T Get(int id);
+        public int ID { get; set; }
     }
 }

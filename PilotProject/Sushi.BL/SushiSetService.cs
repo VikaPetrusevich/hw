@@ -9,7 +9,9 @@ namespace Sushi.BL
 {
     public class SushiSetService : ISushiSetService
     {
-        private IRepository<SushiSet> _sushiRepository = new ListRepository<SushiSet>();
+        private IRepository<SushiSet> _sushiRepository = new SushiSetRepository<SushiSet>();
+
+        private IRepository<Order> _orderRepository = new OrderRepository<Order>();
 
         public void AddSet(SushiSet sushiSet)
         {
@@ -20,6 +22,27 @@ namespace Sushi.BL
         {
             var allSushiSet = _sushiRepository.GetAll();
             return allSushiSet.Select(s => (SushiSet)s).ToList();
+        }
+
+        public Order AddSushiToOrder(int setId, int orderId) 
+        {
+            var sushiSet = _sushiRepository.Get(setId);
+
+            var order = _orderRepository.Get(orderId);
+            if (order == null)
+            {
+                order = new Order();
+
+                order.SushiSet.Add(sushiSet);
+            }
+            else 
+            {
+                order.SushiSet.Add(sushiSet);
+            }
+
+            _orderRepository.Add(order);
+
+            return order;
         }
     }
 }
