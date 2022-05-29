@@ -10,8 +10,8 @@ namespace Sushi.BL
 {
     public class Order:BaseOrder
     {
-        public Person PersonInfo { get; set; }
+        public Person PersonInfo { get; set; } = new Person();
 
-        public List<SushiSet> SushiSet { get; set; }
+        public List<SushiSet> SushiSet { get; set; } = new List<SushiSet>();
     }
 }

@@ -17,7 +17,7 @@ namespace Sushi.DAL
 
         public T Get(int id)
         {
-            throw new NotImplementedException();
+            return _collection.FirstOrDefault(x => x.Id == id);
         }
 
         public List<T> GetAll()

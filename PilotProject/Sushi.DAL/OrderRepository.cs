@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace Sushi.DAL
 {
-    public class OrderRepository<BaseOrder> : IRepository<BaseOrder> 
+    public class OrderRepository<T> : IRepository<T> where T : BaseOrder
     {
-        
-        public void Add(BaseOrder set)
+        private List<T> _collection = new List<T>();
+
+        public void Add(T order)
         {
-            throw new NotImplementedException();
+            _collection.Add(order);
         }
 
-        public BaseOrder Get(int id)
+        public T Get(int id)
         {
-            throw new NotImplementedException();
+            return _collection.FirstOrDefault(x => x.Id == id);
         }
 
-        List<BaseOrder> IRepository<BaseOrder>.GetAll()
+        List<T> IRepository<T>.GetAll()
         {
-            throw new NotImplementedException();
+            return _collection;
         }
     }
 }

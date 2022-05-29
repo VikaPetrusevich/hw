@@ -24,7 +24,7 @@ namespace Sushi.BL
             return allSushiSet.Select(s => (SushiSet)s).ToList();
         }
 
-        public Order AddSushiToOrder(int setId, int orderId) 
+        public Order AddSushiToOrder(int setId, int orderId = 1) 
         {
             var sushiSet = _sushiRepository.Get(setId);
 
@@ -33,7 +33,11 @@ namespace Sushi.BL
             {
                 order = new Order();
 
+                order.Id = orderId;
+
                 order.SushiSet.Add(sushiSet);
+
+                _orderRepository.Add(order);
             }
             else 
             {
@@ -43,6 +47,11 @@ namespace Sushi.BL
             _orderRepository.Add(order);
 
             return order;
+        }
+
+        public Order GetOrder(int orderId) 
+        { 
+            return _orderRepository.Get(orderId);
         }
     }
 }

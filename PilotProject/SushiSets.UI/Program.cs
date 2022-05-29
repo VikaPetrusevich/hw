@@ -53,7 +53,7 @@ void MainMenuHandle(int key,ref bool userWantExit)
     {
         case 1: DisplaySushiSetHandle();
             break;
-        case 2: Console.WriteLine("Вы выбрали просмотр корзины.");
+        case 2: DisplayOrderHandle();
             break;
         case 3: Console.WriteLine("Вы выбрали оформление заказа.");
             break;
@@ -70,7 +70,7 @@ void DisplaySushiSetHandle()
     var isBack = false;
     while (!isBack)
     {
-        Console.WriteLine("Меню суши сетов.");
+        Console.WriteLine("\nМеню суши сетов.");
         var sushiSetList = setCollectionService.GetSushiList();
         foreach (var item in sushiSetList)
         {
@@ -85,10 +85,25 @@ void DisplaySushiSetHandle()
         }
         else
         {
-
+            var order = setCollectionService.AddSushiToOrder(choose);
+            isBack = true;
+            Console.WriteLine( "\nСуши-сет добавлен в заказ.\n");
         }
     }
     
+}
+
+void DisplayOrderHandle() 
+{
+    Console.WriteLine("\nВы выбрали просмотр корзины.");
+
+    var order = setCollectionService.GetOrder(1);
+    
+    var sushiSetOrder = order.SushiSet;
+    foreach (var item in sushiSetOrder) 
+    {
+        Console.WriteLine(item.ToString());
+    }
 }
 
 void ExistHandle(ref bool userWantExit) 

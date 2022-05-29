@@ -8,6 +8,6 @@ namespace Sushi.DAL
 {
     public class BaseOrder
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
     }
 }
