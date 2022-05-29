@@ -55,7 +55,7 @@ void MainMenuHandle(int key,ref bool userWantExit)
             break;
         case 2: DisplayOrderHandle();
             break;
-        case 3: Console.WriteLine("Вы выбрали оформление заказа.");
+        case 3: CheckoutHandle();
             break;
         case 4: ExistHandle(ref userWantExit);
             break;
@@ -104,6 +104,27 @@ void DisplayOrderHandle()
     {
         Console.WriteLine(item.ToString());
     }
+}
+
+void CheckoutHandle() 
+{
+    Console.WriteLine("\nВы перешли к заказу суши-сета.\n");
+
+    var order = setCollectionService.GetOrder(1);
+
+    Console.WriteLine("Введите Ваше имя.");
+    var name = Console.ReadLine();
+
+    Console.WriteLine("Введите Ваш адрес.");
+    var adress = Console.ReadLine();
+
+    order.PersonInfo.Name = name;
+
+    order.PersonInfo.Adress = adress;
+
+    Console.WriteLine("Вы оформили заказ, ожидайте доставки.");
+
+    userWantExit = true;
 }
 
 void ExistHandle(ref bool userWantExit) 
